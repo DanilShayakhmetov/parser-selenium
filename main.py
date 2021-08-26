@@ -1,8 +1,10 @@
 # импорт библиотек
 import os
+import time
 
 from selenium import webdriver
 from bs4 import BeautifulSoup
+from selenium.webdriver.common.keys import Keys
 
 # driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
 
@@ -10,16 +12,17 @@ from bs4 import BeautifulSoup
 chromedriver = "/usr/lib/chromium-browser/chromedriver"
 os.environ["webdriver.chrome.driver"] = chromedriver
 driver = webdriver.Chrome(chromedriver)
-# driver.get("http://stackoverflow.com")
-
-# # путь к драйверу chrome
-# chromedriver = '/usr/bin/chromium-browser'
-# options = webdriver.ChromeOptions()
-# options.add_argument('headless')  # для открытия headless-браузера
-# browser = webdriver.Chrome(executable_path=chromedriver, chrome_options=options)
 driver.get("https://yandex.ru/news/smi")
+content = driver.find_elements_by_css_selector('div.smi-chart__brick')
+for i in content:
+    time.sleep(2)
+    i.click()
+    back = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[1]/form/button')
+    time.sleep(5)
+    back.click()
 
-
+# content.click()
+# print(content)
 
 
 
